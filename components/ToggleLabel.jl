@@ -1,9 +1,9 @@
 ToggleLabel = Component(
-    :(@in value = true),
+    :(@in value = "true"),
     :(),
     quote
         let
-            toggle(:value, color="blue", label="Click me!")
+            toggle("Toggle", :value, color="blue")
         end
     end,
     "ToggleLabel_"

@@ -1,9 +1,9 @@
 Toggle = Component(
-    :(@in value = true),
+    :(@in value = "true"),
     :(),
     quote
         let
-            toggle(:value, color="blue")
+            toggle("Toggle", :value, color="blue")
         end
     end,
     "Toggle_"

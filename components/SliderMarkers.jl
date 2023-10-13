@@ -12,7 +12,7 @@ SliderMarkers = Component(
                         (key!)="marker.index",
                         (style!)="marker.style",
                         var"v-on:click"="volume = marker.value",
-                        "{{marker}}"
+                        #= "{{marker}}" =#
                     )
                 )
             )

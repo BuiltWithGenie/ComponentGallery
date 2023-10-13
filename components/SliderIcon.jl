@@ -13,5 +13,5 @@ SliderIcon = Component(
             ])
         end
     end,
-    "SliderIcon"
+    "SliderIcon_"
 )
