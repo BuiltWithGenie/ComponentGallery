@@ -1,67 +1,52 @@
 using GenieFramework
 include("Components.jl")
 using .Components: Component, variables, handlers, ui
-include("components/Slider.jl")
-include("components/SliderIcon.jl")
-include("components/SliderMarkers.jl")
-include("components/FilePicker.jl")
-include("components/TextInput.jl")
-include("components/TextInputPassword.jl")
-include("components/TextInputMask.jl")
-include("components/TextInputValidation.jl")
-include("components/Toggle.jl")
-include("components/ToggleLabel.jl")
+for f in readdir("components")
+    includet("components/$f")
+end
 @genietools
 
 @app begin
-    @in left_drawer_open = false
+    @in left_drawer_open = true
     @in selected_component = "input"
-    @out tab = "html"
-    variables(Slider, @__MODULE__)
-    variables(SliderIcon, @__MODULE__)
-    variables(SliderMarkers, @__MODULE__)
-    variables(FilePicker, @__MODULE__)
-    variables(TextInput, @__MODULE__)
-    variables(TextInputPassword, @__MODULE__)
-    variables(TextInputMask, @__MODULE__)
-    variables(TextInputValidation, @__MODULE__)
-    variables(Toggle, @__MODULE__)
-    variables(ToggleLabel, @__MODULE__)
 end
-handlers(SliderMarkers, @__MODULE__)
-handlers(FilePicker, @__MODULE__)
-handlers(TextInput, @__MODULE__)
-handlers(TextInputValidation, @__MODULE__)
+
+function docs_card(f::Function)
+    @show f
+    docs = (@doc checkbox).content[1]
+    @show d
+    card(class="q-pa-md q-mt-md p-5 mt-5", [h1("Docstring"), "<md-block>  $docs </md-block>"])
+end
 
 function form_card(code, title="")
     card(style="margin-top:10px;padding:15px", [h4(title), code])
 end
-function form_card(c::Component, title="")
+function form_card(c::Component, title="", M=@__MODULE__)
     tabname = Symbol(string(c.prefix, "tab"))
 
-    eval(:(@in $tabname = "html"))
-
+    eval(:(@in $tabname = "julia"))
     Html.div(class="flex", [
-        card(style="margin-top:10px;padding:15px;width:50%", [h4(title), ui(c)]),
+        card(style="margin-top:10px;padding:15px;width:50%", [h4(title), c(M=M)]),
         Html.div(style="width:50%", class="p-2",
-            card(class="q-pa-md", [
+            card(class="q-pa-md", style="margin-top:10px; margin-left:10px", [
                 quasar(:tabs, fieldname=Symbol(tabname), class="bg-primary text-white", [
-                    tab(name="html", label="HTML",),
-                    tab(name="julia", label="Julia",)
+                    tab(name="julia", label="Julia",),
+                    tab(name="html", label="HTML",)
                 ]),
                 tabpanelgroup(Symbol(tabname), animated="", [
-                    tabpanel(name="html",
-                        pre(code(class="html", style="white-space: pre-wrap; overflow-wrap: break-word;",
-                            replace(prettify(ui(c)), ">" => "&gt", "<" => "&lt")
-                        ))),
                     tabpanel(name="julia",
-                        pre(code(class="julia", style="white-space: pre-wrap; overflow-wrap: break-word;",
-                            replace(string(c.ui), ">" => "&gt", "<" => "&lt")
+                        pre(code(class="language-julia", style="white-space: pre-wrap; overflow-wrap: break-word;",
+                            ui(c, "jl")
+                        ))),
+                    tabpanel(name="html",
+                        pre(code(class="language-html", style="white-space: pre-wrap; overflow-wrap: break-word;",
+                            replace(prettify(ui(c, "html")), ">" => "&gt", "<" => "&lt")
                         )))
                 ])
             ]))
     ])
 end
 
-@page("/", "ui.jl")
+
+@page("/", "ui.jl", layout = "layout.html")
 
