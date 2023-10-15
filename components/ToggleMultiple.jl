@@ -5,11 +5,9 @@ ToggleMultiple = Component(
     end,
     :(),
     quote
-        let
-            Html.div(@recur("toggle in $(prefix)toggle_list"),
-                toggle(:toggle, :toggle_states, val=:toggle, color=:toggle)
-            )
-        end
+        Html.div(@recur("toggle in $(prefix)toggle_list"),
+            toggle(:toggle, :toggle_states, val=:toggle, color=:toggle)
+        )
     end,
     "ToggleMultiple_"
 )

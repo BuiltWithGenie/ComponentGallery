@@ -37,9 +37,13 @@ end
 variables(c::Component, M::Module=@__MODULE__) = Base.eval(M, c.variables)
 handlers(c::Component, M::Module=@__MODULE__) = Base.eval(M, c.handlers)
 ui(c::Component; M::Module=@__MODULE__) = Base.eval(M, c.ui)
+
+#= function handlers(c, print_code) =#
+#=     return =#
+#= end =#
 function ui(c, lang::String)
     if lang == "jl"
-        return extractLetBlock(repr(c.ui))
+        return extract_code(string(c.ui))
     else
         return ui(c)
     end

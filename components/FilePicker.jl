@@ -6,9 +6,7 @@ FilePicker = Component(
         println(files)
     end),
     quote
-        let
-            cell([quasar(:file, fieldname=:files, label="Pick files", filled="", counter="", multiple="multiple", style="max-width: 301px",)])
-        end
+        cell([quasar(:file, fieldname=:files, label="Pick files", filled="", counter="", multiple="multiple", style="max-width: 301px",)])
     end,
     "Files_"
 )

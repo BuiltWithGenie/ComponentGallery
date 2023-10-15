@@ -2,9 +2,7 @@ Checkbox = Component(
     :(@in checked = true),
     :(),
     quote
-        let
-            checkbox("Checked", :checked)
-        end
+        checkbox("Checked", :checked)
     end,
     "Checkbox_"
 )

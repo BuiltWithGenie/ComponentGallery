@@ -1,4 +1,19 @@
-function extractLetBlock(code::String)
+function clean_code(code::String)
+    # Use a regular expression to remove all occurrences of comments between #= and =#
+    cleaned_code = replace(code, r"#=.*?=#"s => "")
+    #= cleaned_code = join(filter(line -> !isempty(strip(line)), split(cleaned_code, '\n')), '\n') =#
+    return String(strip(cleaned_code))  # Remove leading and trailing whitespaces and return the cleaned code
+end
+
+function extract_code(code::String)
+    extracted_code = clean_code(code)
+    if startswith(extracted_code, "begin")
+        lines = strip.(filter(line -> !isempty(strip(line)), split(extracted_code, '\n')))
+        extracted_code = join(lines[2:end-1], "\n")
+    end
+    return extracted_code
+end
+function extract_let_block(code::String)
     # Split the code into lines
     lines = split(code, '\n')
 

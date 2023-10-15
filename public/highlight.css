@@ -1,0 +1,84 @@
+pre.hljl {
+    border: 1px solid #ccc;
+    margin: 5px;
+    padding: 5px;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    background-color: rgb(248,248,248); }
+pre.hljl > span.hljl-t { background-color: rgb(248,248,248); }
+pre.hljl > span.hljl-w { color: rgb(187,187,187); }
+pre.hljl > span.hljl-e { background-color: rgb(248,248,248); }
+pre.hljl > span.hljl-eB { color: rgb(166,23,23); background-color: rgb(227,210,210); }
+pre.hljl > span.hljl-o { background-color: rgb(248,248,248); }
+pre.hljl > span.hljl-k { color: rgb(0,0,0); font-weight: bold; }
+pre.hljl > span.hljl-kc { color: rgb(0,0,0); font-weight: bold; }
+pre.hljl > span.hljl-kd { color: rgb(0,0,0); font-weight: bold; }
+pre.hljl > span.hljl-kn { color: rgb(0,0,0); font-weight: bold; }
+pre.hljl > span.hljl-kp { color: rgb(0,0,0); font-weight: bold; }
+pre.hljl > span.hljl-kr { color: rgb(0,0,0); font-weight: bold; }
+pre.hljl > span.hljl-kt { color: rgb(68,85,136); font-weight: bold; }
+pre.hljl > span.hljl-n { color: rgb(0,128,128); }
+pre.hljl > span.hljl-na { color: rgb(0,128,128); }
+pre.hljl > span.hljl-nb { color: rgb(0,134,179); }
+pre.hljl > span.hljl-nbp { color: rgb(153,153,153); }
+pre.hljl > span.hljl-nc { color: rgb(68,85,136); font-weight: bold; }
+pre.hljl > span.hljl-ncB { color: rgb(0,128,128); }
+pre.hljl > span.hljl-nd { color: rgb(60,93,93); font-weight: bold; }
+pre.hljl > span.hljl-ne { color: rgb(128,0,128); }
+pre.hljl > span.hljl-neB { color: rgb(153,0,0); font-weight: bold; }
+pre.hljl > span.hljl-nf { color: rgb(153,0,0); font-weight: bold; }
+pre.hljl > span.hljl-nfm { color: rgb(153,0,0); font-weight: bold; }
+pre.hljl > span.hljl-np { color: rgb(0,128,128); }
+pre.hljl > span.hljl-nl { color: rgb(153,0,0); font-weight: bold; }
+pre.hljl > span.hljl-nn { color: rgb(85,85,85); }
+pre.hljl > span.hljl-no { color: rgb(0,128,128); }
+pre.hljl > span.hljl-nt { color: rgb(0,0,128); }
+pre.hljl > span.hljl-nv { color: rgb(0,128,128); }
+pre.hljl > span.hljl-nvc { color: rgb(0,128,128); }
+pre.hljl > span.hljl-nvg { color: rgb(0,128,128); }
+pre.hljl > span.hljl-nvi { color: rgb(0,128,128); }
+pre.hljl > span.hljl-nvm { color: rgb(0,128,128); }
+pre.hljl > span.hljl-l { background-color: rgb(248,248,248); }
+pre.hljl > span.hljl-ld { background-color: rgb(248,248,248); }
+pre.hljl > span.hljl-s { color: rgb(221,17,68); }
+pre.hljl > span.hljl-sa { color: rgb(221,17,68); }
+pre.hljl > span.hljl-sb { color: rgb(221,17,68); }
+pre.hljl > span.hljl-sc { color: rgb(221,17,68); }
+pre.hljl > span.hljl-sd { color: rgb(221,17,68); }
+pre.hljl > span.hljl-sdB { color: rgb(221,17,68); }
+pre.hljl > span.hljl-sdC { color: rgb(221,17,68); }
+pre.hljl > span.hljl-se { color: rgb(221,17,68); }
+pre.hljl > span.hljl-sh { color: rgb(221,17,68); }
+pre.hljl > span.hljl-si { color: rgb(221,17,68); }
+pre.hljl > span.hljl-so { color: rgb(221,17,68); }
+pre.hljl > span.hljl-sr { color: rgb(0,153,38); }
+pre.hljl > span.hljl-ss { color: rgb(221,17,68); }
+pre.hljl > span.hljl-ssB { color: rgb(153,0,115); }
+pre.hljl > span.hljl-nB { color: rgb(0,153,153); }
+pre.hljl > span.hljl-nbB { color: rgb(0,153,153); }
+pre.hljl > span.hljl-nfB { color: rgb(0,153,153); }
+pre.hljl > span.hljl-nh { color: rgb(0,153,153); }
+pre.hljl > span.hljl-ni { color: rgb(0,153,153); }
+pre.hljl > span.hljl-nil { color: rgb(0,153,153); }
+pre.hljl > span.hljl-noB { color: rgb(0,153,153); }
+pre.hljl > span.hljl-oB { color: rgb(0,0,0); font-weight: bold; }
+pre.hljl > span.hljl-ow { color: rgb(0,0,0); font-weight: bold; }
+pre.hljl > span.hljl-p { background-color: rgb(248,248,248); }
+pre.hljl > span.hljl-c { color: rgb(153,153,136); font-style: italic; }
+pre.hljl > span.hljl-ch { color: rgb(153,153,136); font-style: italic; }
+pre.hljl > span.hljl-cm { color: rgb(153,153,136); font-style: italic; }
+pre.hljl > span.hljl-cp { color: rgb(153,153,153); font-weight: bold; }
+pre.hljl > span.hljl-cpB { color: rgb(153,153,136); font-style: italic; }
+pre.hljl > span.hljl-cs { color: rgb(153,153,136); font-style: italic; }
+pre.hljl > span.hljl-csB { color: rgb(153,153,153); font-weight: bold; font-style: italic; }
+pre.hljl > span.hljl-g { color: rgb(0,0,0); }
+pre.hljl > span.hljl-gd { color: rgb(0,0,0); background-color: rgb(255,221,221); }
+pre.hljl > span.hljl-ge { color: rgb(0,0,0); font-style: italic; }
+pre.hljl > span.hljl-geB { color: rgb(170,0,0); }
+pre.hljl > span.hljl-gh { color: rgb(153,153,153); }
+pre.hljl > span.hljl-gi { color: rgb(0,0,0); background-color: rgb(221,255,221); }
+pre.hljl > span.hljl-go { color: rgb(136,136,136); }
+pre.hljl > span.hljl-gp { color: rgb(85,85,85); }
+pre.hljl > span.hljl-gs { font-weight: bold; }
+pre.hljl > span.hljl-gsB { color: rgb(170,170,170); }
+pre.hljl > span.hljl-gt { color: rgb(170,0,0); }

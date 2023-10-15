@@ -4,9 +4,7 @@ ToggleValue = Component(
     :(@in value = "true"),
     :(),
     quote
-        let
-            toggle("Click me!", :value, color="blue", var"true-value"="On", var"false-value"="Off")
-        end
+        toggle("Click me!", :value, color="blue", var"true-value"="On", var"false-value"="Off")
     end,
     "ToggleValue_"
 )

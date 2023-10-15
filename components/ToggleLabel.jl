@@ -2,9 +2,7 @@ ToggleLabel = Component(
     :(@in value = "true"),
     :(),
     quote
-        let
-            toggle("Toggle", :value, color="blue")
-        end
+        toggle("Toggle", :value, color="blue")
     end,
     "ToggleLabel_"
 )
