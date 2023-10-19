@@ -1,7 +1,8 @@
 using GenieFramework, Highlights, JuliaFormatter
 using DataFrames: DataFrame
 include("Components.jl")
-using .Components: Component, variables, handlers, ui
+include("utils.jl")
+using .Components: Component, variables, handlers, ui, get_code
 for f in readdir("components")
     include("components/$f")
 end
@@ -16,7 +17,8 @@ end
 function docs_card(docs)
     docs = string(docs.content[1])
     docs = highlight_markdown_code_blocks(docs)
-    card(class="q-pa-md q-mt-md p-5 mt-5", [h1("Docstring"), "<md-block>  $docs </md-block>"])
+    # setting a key is necessary to force the page to re-render the md-block component when the tab changes. otherwise a page reload is needed
+    card(class="q-pa-md q-mt-md p-5 mt-5", [h1("Docstring"), "<md-block :key='$(string(randn(10)))'>  $docs </md-block>"])
 end
 
 function form_card(code, title="")
@@ -24,6 +26,10 @@ function form_card(code, title="")
 end
 
 function form_card(c::Component, title="", M=@__MODULE__)
+    reactive_code = ""
+    if !is_empty(c.variables) || !is_empty(c.handlers)
+        reactive_code = join(["@app begin\n", get_code(c, :variables)*"\n", get_code(c, :handlers)* " ","end"])
+    end
     tabname = Symbol(string(c.prefix, "tab"))
 
     eval(:(@in $tabname = "julia"))
@@ -36,13 +42,20 @@ function form_card(c::Component, title="", M=@__MODULE__)
                     tab(name="html", label="HTML",)
                 ]),
                 tabpanelgroup(Symbol(tabname), animated="", [
-                    tabpanel(name="julia",
-                        #= pre(code(class="language-julia", style="white-space: pre-wrap; overflow-wrap: break-word;", =#
-                        highlight_code(ui(c, "jl"))
-                        #= )) =#
+                    tabpanel(name="julia",[
+
+                        pre(code(class="language-julia", style="overflow:auto",
+                            highlight_code(get_code(c, :ui, "jl"))
+                                )),
+                    (reactive_code == "" ? "" :
+                        expansionitem(label="Show reactive code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class" = "bg-blue-grey-1",
+                        pre(code(class="language-julia", style="white-space: pre-wrap; overflow-wrap: break-word;",
+                            highlight_code(reactive_code)
+                                )))),
+                    ]
                     ),
                     tabpanel(name="html",
-                        pre(code(class="language-html", style="white-space: pre-wrap; overflow-wrap: break-word;",
+                        pre(code(class="language-html", style="overflow:auto",
                             replace(prettify(ui(c, "html")), ">" => "&gt", "<" => "&lt")
                         )))
                 ])

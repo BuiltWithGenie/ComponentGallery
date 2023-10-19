@@ -2,8 +2,7 @@ pre.hljl {
     border: 1px solid #ccc;
     margin: 5px;
     padding: 5px;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
+    overflow: auto;
     background-color: rgb(248,248,248); }
 pre.hljl > span.hljl-t { background-color: rgb(248,248,248); }
 pre.hljl > span.hljl-w { color: rgb(187,187,187); }

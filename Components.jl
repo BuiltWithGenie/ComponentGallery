@@ -1,7 +1,7 @@
 module Components
 include("utils.jl")
 using GenieFramework
-export Component, variables, handlers, ui
+export Component, variables, handlers, ui, get_code
 
 struct Component
     variables::Expr
@@ -44,6 +44,18 @@ ui(c::Component; M::Module=@__MODULE__) = Base.eval(M, c.ui)
 function ui(c, lang::String)
     if lang == "jl"
         return extract_code(string(c.ui))
+    else
+        return ui(c)
+    end
+end
+
+function get_code(c, field::Symbol, lang::String="jl")
+    e = getfield(c,field)
+    if is_empty(e)
+        return ""
+    end
+    if lang == "jl"
+        return extract_code(string(e))
     else
         return ui(c)
     end
