@@ -56,7 +56,7 @@ end
 
 is_empty(expr::Expr) = string(expr) == "()"
 
-function export_components(list::Vector{Symbol}; name_map::Dict = Dict())
+function export_components(list::Vector{Symbol}; name_map::Dict=Dict())
     if !isdir("export")
         mkdir("export")
     end
@@ -68,12 +68,12 @@ function export_components(list::Vector{Symbol}; name_map::Dict = Dict())
             c = eval(csymbol)
             reactive_code = ""
             if !is_empty(c.variables) || !is_empty(c.handlers)
-                reactive_code = join(["@app begin\n", get_code(c, :variables) * "\n", get_code(c, :handlers) * " ", "\nend\n"])
+                reactive_code = join(["@app begin\n", get_code(c, :variables) * "\n", get_code(c, :handlers) * " ", "end\n"])
             end
             ui_code = "ui() = " * replace(get_code(c, :ui), "$(c.prefix)" => "") |> format_text
             reactive_code = replace(reactive_code, "$(c.prefix)" => "") * "\n" |> format_text
             # rename output file if name map is passed
-            if haskey(name_map, cname )
+            if haskey(name_map, cname)
                 cname = name_map[cname]
             end
             open("export/$cname.jl", "w") do f
@@ -88,7 +88,7 @@ function export_components(list::Vector{Symbol}; name_map::Dict = Dict())
 end
 
 #name_map = Dict("Button" => "btn", "DatePickerC" => "datepicker", "TextInput" = "input")
-function export_components(;name_map::Dict = Dict())
+function export_components(; name_map::Dict=Dict())
     files = readdir("components")
     components = [Symbol(split(f, ".")[1]) for f in files]
     export_components(components; name_map)
