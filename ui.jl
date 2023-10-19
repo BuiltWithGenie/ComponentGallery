@@ -12,21 +12,58 @@ StippleUI.layout(style="max-width:1400px;",
         ),
         drawer(bordered="", fieldname="left_drawer_open", side="left",
             list(bordered=true, separator=true, [
+                item(clickable="", vripple="", @click("selected_component = 'button'"), itemsection("Button")),
                 item(clickable="", vripple="", @click("selected_component = 'checkbox'"), itemsection("Checkbox")),
-                item(clickable="", vripple="", @click("selected_component = 'inputs'"), itemsection("Inputs")),
+                item(clickable="", vripple="", @click("selected_component = 'column'"), itemsection("Column")),
+                item(clickable="", vripple="", @click("selected_component = 'date'"), itemsection("Date")),
+                item(clickable="", vripple="", @click("selected_component = 'footer'"), itemsection("Footer")),
+                item(clickable="", vripple="", @click("selected_component = 'heading'"), itemsection("Heading")),
+                item(clickable="", vripple="", @click("selected_component = 'icon'"), itemsection("Icon")),
+                item(clickable="", vripple="", @click("selected_component = 'inputs'"), itemsection("Input")),
+                item(clickable="", vripple="", @click("selected_component = 'list'"), itemsection("List")),
                 item(clickable="", vripple="", @click("selected_component = 'radio'"), itemsection("Radio")),
-                item(clickable="", vripple="", var"v-on:click"="selected_component = 'sliders'", itemsection("Slider")),
+                item(clickable="", vripple="", @click("selected_component = 'range'"), itemsection("Range")),
+                item(clickable="", vripple="", @click("selected_component = 'row'"), itemsection("Row")),
+    item(clickable="", vripple="", @click("selected_component = 'scrollarea'"), itemsection("Scroll area")),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'select'", itemsection("Select")),
+                item(clickable="", vripple="", var"v-on:click"="selected_component = 'sliders'", itemsection("Slider")),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'table'", itemsection("Table")),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'toggles'", itemsection("Toggle")),
             ])
         ),
         page_container(style="margin-left:50px",
             [
+                Html.div(class="", @iif("selected_component == 'button'"), [
+                    form_card(Button, "Button"),
+                    form_card(ButtonIcon, "Button with icon"),
+                    form_card(ButtonTooltip, "Button with tooltip"),
+                    form_card(ButtonProgress, "Button progress indicator"),
+                    #= docs_card(@doc btn) =#
+                ]),
                 Html.div(class="", @iif("selected_component == 'checkbox'"), [
                     form_card(Checkbox, "Checkbox"),
                     form_card(CheckboxMultiple, "Multiple checkboxes"),
                     docs_card(@doc checkbox)
+                ]),
+                Html.div(class="", @iif("selected_component == 'column'"), [
+                    form_card(ColumnC, "Column"),
+                    #= docs_card(@doc checkbox) =#
+                ]),
+                Html.div(class="", @iif("selected_component == 'date'"), [
+                    form_card(DatePickerC, "Date picker"),
+                    form_card(DateMultiple, "Multiple date picks"),
+                    form_card(DateRangeC, "Range date picker"),
+                    docs_card(@doc datepicker)
+                ]),
+                Html.div(class="", @iif("selected_component == 'footer'"), [
+                    form_card(Footer, "Footer"),
+    ]),
+                Html.div(class="", @iif("selected_component == 'heading'"), [
+                    form_card(Heading, "Heading"),
+    ]),
+                Html.div(class="", @iif("selected_component == 'icon'"), [
+                    form_card(Icon, "Icon"),
+                    docs_card(@doc icon)
                 ]),
                 Html.div(class="", @iif("selected_component == 'inputs'"), [
                     form_card(TextInput, "Text input"),
@@ -35,22 +72,40 @@ StippleUI.layout(style="max-width:1400px;",
                     form_card(TextInputValidation, "Text input validation"),
                     docs_card(@doc textfield)
                 ]),
+                Html.div(class="", @iif("selected_component == 'list'"), [
+                    form_card(List, "List"),
+                    form_card(ListComplex, "Complex list"),
+                    docs_card(@doc list)
+                ]),
                 Html.div(class="", @iif("selected_component == 'radio'"), [
                     form_card(Radio, "Radio"),
                     form_card(RadioColor, "Colored radio"),
                     docs_card(@doc radio)
+                ]),
+                Html.div(class="", @iif("selected_component == 'range'"), [
+                    form_card(Range, "Range"),
+                    form_card(RangeMarkers, "Range with markers"),
+                    docs_card(@doc range)
+                ]),
+                Html.div(class="", @iif("selected_component == 'row'"), [
+                    form_card(Row, "Row"),
+                    #= docs_card(@doc row) =#
+                ]),
+                Html.div(class="", @iif("selected_component == 'scrollarea'"), [
+                    form_card(ScrollArea, "Scroll area"),
+                    docs_card(@doc scrollarea)
+    ]),
+                Html.div(class="", @iif("selected_component == 'select'"), [
+                    form_card(Select, "Select"),
+                    form_card(SelectClearable, "Clearable select with input"),
+                    form_card(SelectMultiple, "Multiple choices with chips"),
+                    docs_card(@doc select)
                 ]),
                 Html.div(class="", @iif("selected_component == 'sliders'"), [
                     form_card(Slider, "Slider"),
                     form_card(SliderIcon, "Slider with an icon"),
                     docs_card(@doc slider)
                     #= form_card(SliderMarkers, "Slider with markers") =#
-                ]),
-                Html.div(class="", @iif("selected_component == 'select'"), [
-                    form_card(Select, "Select"),
-                    form_card(SelectClearable, "Clearable select with input"),
-                    form_card(SelectMultiple, "Multiple choices with chips"),
-                    docs_card(@doc select)
                 ]),
                 Html.div(class="", @iif("selected_component == 'table'"), [
                     form_card(Table, "Table"),
@@ -66,6 +121,7 @@ StippleUI.layout(style="max-width:1400px;",
                     docs_card(@doc toggle)
                 ]),
             ]),
+    footer(br())
     ],
     view="hHh lpR fFf",
     class="window-height",
