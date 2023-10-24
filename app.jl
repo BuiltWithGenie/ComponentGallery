@@ -10,7 +10,7 @@ end
 
 @app begin
     @in left_drawer_open = true
-    @in selected_component = "input"
+    @in selected_component = "button"
 end
 
 # it'd be easier to pass the function to the docs_card function as a parameter `f`, but calling @doc f from insinde `docs_card` yields "no documentation found"
@@ -28,7 +28,7 @@ end
 function form_card(c::Component, title="", M=@__MODULE__)
     reactive_code = ""
     if !is_empty(c.variables) || !is_empty(c.handlers)
-        reactive_code = join(["@app begin\n", get_code(c, :variables)*"\n", get_code(c, :handlers)* " ","end"])
+        reactive_code = join(["@app begin\n", get_code(c, :variables) * "\n", get_code(c, :handlers) * " ", "end"])
     end
     tabname = Symbol(string(c.prefix, "tab"))
 
@@ -42,20 +42,17 @@ function form_card(c::Component, title="", M=@__MODULE__)
                     tab(name="html", label="HTML",)
                 ]),
                 tabpanelgroup(Symbol(tabname), animated="", [
-                    tabpanel(name="julia",[
-
-                        pre(code(class="language-julia", style="overflow:auto",
-                            highlight_code(get_code(c, :ui, "jl"))
-                                )),
-                    (reactive_code == "" ? "" :
-                        expansionitem(label="Show reactive code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class" = "bg-blue-grey-1",
-                        pre(code(class="language-julia", style="white-space: pre-wrap; overflow-wrap: break-word;",
-                            highlight_code(reactive_code)
-                                )))),
+                    tabpanel(name="julia", [pre(var"v-pre"=true, code(class="language-julia", style="overflow:auto", highlight_code(get_code(c, :ui, "jl"))
+                        )),
+                        (reactive_code == "" ? "" :
+                         expansionitem(label="Show reactive code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class"="bg-blue-grey-1",
+                            pre(var"v-pre"=true, code(class="language-julia", style="white-space: pre-wrap; overflow-wrap: break-word;",
+                                highlight_code(reactive_code)
+                            )))),
                     ]
                     ),
                     tabpanel(name="html",
-                        pre(code(class="language-html", style="overflow:auto",
+                        pre(var"v-pre"=true, code(class="language-html", style="overflow:auto",
                             replace(prettify(ui(c, "html")), ">" => "&gt", "<" => "&lt")
                         )))
                 ])
