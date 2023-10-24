@@ -6,7 +6,7 @@
 
     <% Stipple.sesstoken() %>
         <title>Genie component gallery</title>
-        <link rel="stylesheet" href="/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="/highlight.css" />
         <% if isfile(joinpath(Genie.config.server_document_root, "css" , "genieapp.css" )) %>
             <link rel='stylesheet' href='/css/genieapp.css' />
             <% else %>
@@ -58,9 +58,3 @@
 </body>
 
 </html>
-
-source = """[checkbox("Orange", :selection, val = "orange", color = "orange"), checkbox("Melon", :selection, val =
-"melon", color = "green"), checkbox("Watermelon", :selection, val = "watermelon", color = "red")]"""
-open("soure.html", "w") do stream
-highlight(stream, MIME("text/html"), source, Lexers.JuliaLexer)
-end
