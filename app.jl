@@ -10,6 +10,7 @@ end
 
 @app begin
     @in left_drawer_open = true
+    @in ministate = true
     @in selected_component = "button"
 end
 
@@ -37,7 +38,7 @@ function form_card(c::Component, title="", M=@__MODULE__)
         card(style="margin-top:10px;padding:15px;width:50%", [h4(title), c(M=M)]),
         Html.div(style="width:50%", class="p-2",
             card(class="q-pa-md", style="margin-top:10px; margin-left:10px", [
-                quasar(:tabs, fieldname=Symbol(tabname), class="bg-primary text-white", [
+                quasar(:tabs, fieldname=Symbol(tabname), style="background:darkblue", class="text-white", [
                     tab(name="julia", label="Julia",),
                     tab(name="html", label="HTML",)
                 ]),
