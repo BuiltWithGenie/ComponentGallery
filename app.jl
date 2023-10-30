@@ -35,29 +35,31 @@ function form_card(c::Component, title="", M=@__MODULE__)
 
     eval(:(@in $tabname = "julia"))
     Html.div(class="flex", [
-        card(style="margin-top:10px;padding:15px;width:50%", [h4(title), c(M=M)]),
-        Html.div(style="width:50%", class="p-2",
-            card(class="q-pa-md", style="margin-top:10px; margin-left:10px", [
-                quasar(:tabs, fieldname=Symbol(tabname), style="background:darkblue", class="text-white", [
-                    tab(name="julia", label="Julia",),
-                    tab(name="html", label="HTML",)
-                ]),
-                tabpanelgroup(Symbol(tabname), animated="", [
-                    tabpanel(name="julia", [pre(var"v-pre"=true, code(class="language-julia", style="overflow:auto", highlight_code(get_code(c, :ui, "jl"))
-                        )),
-                        (reactive_code == "" ? "" :
-                         expansionitem(label="Show reactive code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class"="bg-blue-grey-1",
-                            pre(var"v-pre"=true, code(class="language-julia", style="white-space: pre-wrap; overflow-wrap: break-word;",
-                                highlight_code(reactive_code)
-                            )))),
-                    ]
-                    ),
-                    tabpanel(name="html",
-                        pre(var"v-pre"=true, code(class="language-html", style="overflow:auto",
-                            replace(prettify(ui(c, "html")), ">" => "&gt", "<" => "&lt")
-                        )))
+                            card(style="margin-top:10px;padding:15px;width:100%", [h4(title), Html.div(class="q-pl-sm q-pr-sm",c(M=M)),
+            expansionitem(class="q-mt-lg", label="Show code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class"="bg-blue-grey-1",
+                [
+                    quasar(:tabs, fieldname=Symbol(tabname), dense=true, align="left", style="background:white", class="text-black", [
+                        tab(name="julia", label="Julia",),
+                        tab(name="html", label="HTML",)
+                    ]),
+                    tabpanelgroup(Symbol(tabname), animated="", [
+                        tabpanel(name="julia", [pre(var"v-pre"=true, code(class="language-julia", style="overflow:auto", highlight_code(get_code(c, :ui, "jl"))
+                            )),
+                            (reactive_code == "" ? "" :
+                            expansionitem(label="Reactive code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class"="bg-grey-1",
+                                pre(var"v-pre"=true, code(class="language-julia", style="white-space: pre-wrap; overflow-wrap: break-word;",
+                                    highlight_code(reactive_code)
+                                )))),
+                        ]
+                        ),
+                        tabpanel(name="html",
+                            pre(var"v-pre"=true, code(class="language-html", style="overflow:auto",
+                                replace(prettify(ui(c, "html")), ">" => "&gt", "<" => "&lt")
+                            )))
+                    ])
                 ])
-            ]))
+           
+        ])
     ])
 end
 
