@@ -67,7 +67,7 @@ StippleUI.layout(style="margin:auto;max-width:800px",
             ]),
             Html.div(class="", @iif("selected_component == 'inputs'"), [
                 form_card(TextInput, "Text input"),
-                form_card(TextInputPassword, "Text input password"),
+                #= form_card(TextInputPassword, "Text input password"), =#
                 form_card(TextInputMask, "Text input mask"),
                 form_card(TextInputValidation, "Text input validation"),
                 docs_card(@doc textfield)
