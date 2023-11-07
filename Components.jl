@@ -18,10 +18,14 @@ struct Component
     end
 end
 
-(c::Component)(; M=@__MODULE__) = begin
+variables(c::Component, M::Module=@__MODULE__) = Base.eval(M, c.variables)
+handlers(c::Component, M::Module=@__MODULE__) = Base.eval(M, c.handlers)
+ui(c::Component; M::Module=@__MODULE__) = Base.eval(M, c.ui)
+
+(c::Component)(M) = begin
     variables(c, M)
     handlers(c, M)
-    ui(c)
+    "Instantiated component $(c.prefix)"
 end
 
 #= (c::Component)(uicode; M=@__MODULE__) = begin =#
@@ -33,10 +37,6 @@ end
 #=         return ui(c) =#
 #=     end =#
 #= end =#
-
-variables(c::Component, M::Module=@__MODULE__) = Base.eval(M, c.variables)
-handlers(c::Component, M::Module=@__MODULE__) = Base.eval(M, c.handlers)
-ui(c::Component; M::Module=@__MODULE__) = Base.eval(M, c.ui)
 
 #= function handlers(c, print_code) =#
 #=     return =#
@@ -50,7 +50,7 @@ function ui(c, lang::String)
 end
 
 function get_code(c, field::Symbol, lang::String="jl")
-    e = getfield(c,field)
+    e = getfield(c, field)
     if is_empty(e)
         return ""
     end

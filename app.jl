@@ -3,15 +3,23 @@ using DataFrames: DataFrame
 include("Components.jl")
 include("utils.jl")
 using .Components: Component, variables, handlers, ui, get_code
-for f in readdir("components")
-    include("components/$f")
-end
 @genietools
 
 @app begin
     @in left_drawer_open = true
     @in ministate = true
     @in selected_component = "button"
+end
+
+# load components
+for f in readdir("components")
+    component = include("components/$f")
+    @show component(Main)
+    M = @__MODULE__
+    Base.eval(M, component.variables)
+    Base.eval(M, component.handlers)
+    tabname = Symbol(string(component.prefix, "tab"))
+    eval(:(@in $tabname = "julia"))
 end
 
 # it'd be easier to pass the function to the docs_card function as a parameter `f`, but calling @doc f from insinde `docs_card` yields "no documentation found"
@@ -26,16 +34,16 @@ function form_card(code, title="")
     card(style="margin-top:10px;padding:15px", [h4(title), code])
 end
 
+
 function form_card(c::Component, title="", M=@__MODULE__)
     reactive_code = ""
     if !is_empty(c.variables) || !is_empty(c.handlers)
         reactive_code = join(["@app begin\n", get_code(c, :variables) * "\n", get_code(c, :handlers) * " ", "end"])
     end
-    tabname = Symbol(string(c.prefix, "tab"))
 
-    eval(:(@in $tabname = "julia"))
+    tabname = Symbol(string(c.prefix, "tab"))
     Html.div(class="flex", [
-                            card(style="margin-top:10px;padding:15px;width:100%", [h4(title), Html.div(class="q-pl-sm q-pr-sm",c(M=M)),
+        card(style="margin-top:10px;padding:15px;width:100%", [h4(title), Html.div(class="q-pl-sm q-pr-sm", ui(c)),
             expansionitem(class="q-mt-lg", label="Show code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class"="bg-blue-grey-1",
                 [
                     quasar(:tabs, fieldname=Symbol(tabname), dense=true, align="left", style="background:white", class="text-black", [
@@ -46,7 +54,7 @@ function form_card(c::Component, title="", M=@__MODULE__)
                         tabpanel(name="julia", [pre(var"v-pre"=true, code(class="language-julia", style="overflow:auto", highlight_code(get_code(c, :ui, "jl"))
                             )),
                             (reactive_code == "" ? "" :
-                            expansionitem(label="Reactive code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class"="bg-grey-1",
+                             expansionitem(label="Reactive code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class"="bg-grey-1",
                                 pre(var"v-pre"=true, code(class="language-julia", style="white-space: pre-wrap; overflow-wrap: break-word;",
                                     highlight_code(reactive_code)
                                 )))),
@@ -57,9 +65,7 @@ function form_card(c::Component, title="", M=@__MODULE__)
                                 replace(prettify(ui(c, "html")), ">" => "&gt", "<" => "&lt")
                             )))
                     ])
-                ])
-           
-        ])
+                ])])
     ])
 end
 
