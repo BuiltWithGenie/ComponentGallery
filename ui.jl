@@ -74,7 +74,7 @@ StippleUI.layout(style="margin:auto;max-width:800px",
             ]),
             Html.div(class="", @iif("selected_component == 'list'"), [
                 form_card(List, "List"),
-                form_card(ListComplex, "Complex list"),
+                #= form_card(ListComplex, "Complex list"), =#
                 docs_card(@doc list)
             ]),
             Html.div(class="", @iif("selected_component == 'radio'"), [

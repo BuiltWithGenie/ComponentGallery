@@ -13,7 +13,7 @@ ListComplex = Component(
             item(clickable="", vripple="",
                 item_section([
                     item_label("Password"),
-                    item_label(caption=true, "Require password for purchase or use password to restrict purchase")
+                    item_label(caption=true, "Require password for purchase or use password to m'estrict purchase")
                 ])
             ),
             separator(spaced=true),
@@ -40,18 +40,6 @@ ListComplex = Component(
                 ]
             ),
         ])
-        #= <q-item tag="label" v-ripple> =#
-        #=   <q-item-section side top> =#
-        #=     <q-checkbox v-model="check3" /> =#
-        #=   </q-item-section> =#
-        #==#
-        #=   <q-item-section> =#
-        #=     <q-item-label>Auto-add widgets</q-item-label> =#
-        #=     <q-item-label caption> =#
-        #=       Automatically add home screen widgets =#
-        #=     </q-item-label> =#
-        #=   </q-item-section> =#
-        #= </q-item> =#
     end,
     "ListComplex_"
 )
