@@ -1,5 +1,5 @@
 ListComplex = Component(
-    :(@in check = "false"; @in brightness = 0),
+    :(@in check = "false"),
     :(),
     quote
         list(bordered=true, separator=true, padding=true, style="width:400px", [
@@ -39,14 +39,6 @@ ListComplex = Component(
                     ])
                 ]
             ),
-            item([
-                itemsection(side=true,
-                    icon("brightness_medium", color="deep-orange",)
-                ),
-                itemsection(
-                    slider(0:1:10, :brightness, fieldname="brightness", label="", color="deep-orange",)
-                )
-            ])
         ])
         #= <q-item tag="label" v-ripple> =#
         #=   <q-item-section side top> =#
