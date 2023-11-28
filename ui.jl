@@ -19,6 +19,7 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 item(clickable="", vripple="", @click("selected_component = 'footer'"), [itemsection(avatar=true, icon("south")), itemsection("Footer")]),
                 item(clickable="", vripple="", @click("selected_component = 'heading'"), [itemsection(avatar=true, icon("title")), itemsection("Heading")]),
                 item(clickable="", vripple="", @click("selected_component = 'icon'"), [itemsection(avatar=true, icon("emoji_objects")), itemsection("Icon")]),
+                item(clickable="", vripple="", @click("selected_component = 'img'"), [itemsection(avatar=true, icon("image")), itemsection("Image")]),
                 item(clickable="", vripple="", @click("selected_component = 'inputs'"), [itemsection(avatar=true, icon("input")), itemsection("Input")]),
                 item(clickable="", vripple="", @click("selected_component = 'list'"), [itemsection(avatar=true, icon("list")), itemsection("List")]),
                 item(clickable="", vripple="", @click("selected_component = 'radio'"), [itemsection(avatar=true, icon("radio_button_checked")), itemsection("Radio")]),
@@ -29,6 +30,7 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'sliders'", [itemsection(avatar=true, icon("tune")), itemsection("Slider")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'table'", [itemsection(avatar=true, icon("table_view")), itemsection("Table")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'toggles'", [itemsection(avatar=true, icon("toggle_on")), itemsection("Toggle")]),
+                item(clickable="", vripple="", @click("selected_component = 'video'"), [itemsection(avatar=true, icon("videocam")), itemsection("Video")]),
             ])
         ),
         page_container(
@@ -71,6 +73,12 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 form_card(TextInputMask, "Text input mask"),
                 form_card(TextInputValidation, "Text input validation"),
                 docs_card(@doc textfield)
+            ]),
+            Html.div(class="", @iif("selected_component == 'img'"), [
+                form_card(Img, "Image"),
+                #= form_card(TextInputPassword, "Text input password"), =#
+                form_card(ImgCaption, "Image with caption"),
+                docs_card(@doc imageview)
             ]),
             Html.div(class="", @iif("selected_component == 'list'"), [
                 form_card(List, "List"),
@@ -119,6 +127,10 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 form_card(ToggleValue, "Toggle with custom true/false value"),
                 form_card(ToggleMultiple, "Multiple toggles"),
                 docs_card(@doc toggle)
+            ]),
+            Html.div(class="", @iif("selected_component == 'video'"), [
+                form_card(Video, "Video"),
+                docs_card(@doc video)
             ]),
         ]),
         footer(br())
