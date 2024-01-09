@@ -1,4 +1,4 @@
-FROM julia:latest
+FROM julia:1.9
 RUN useradd --create-home --shell /bin/bash genie
 RUN mkdir /home/genie/app
 COPY . /home/genie/app
