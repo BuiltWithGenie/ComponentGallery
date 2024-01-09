@@ -15,6 +15,6 @@ ENV GENIE_HOST "0.0.0.0"
 ENV PORT "8000"
 ENV WSPORT "8000"
 ENV EARLYBIND "true"
-ENTRYPOINT ["julia", "--project", "--sysimage=/sysimg/gallery.so", "-e", "using GenieFramework; Genie.loadapp(); up(async=false);"]
+ENTRYPOINT ["/bin/bash", "-c", "if [ -f /sysimg/gallery.so ]; then exec julia --project --sysimage=/sysimg/gallery.so -e 'using GenieFramework; Genie.loadapp(); up(async=false);'; else exec julia --project -e 'using GenieFramework; Genie.loadapp(); up(async=false);'; fi"]
 
 
