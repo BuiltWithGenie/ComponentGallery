@@ -1,5 +1,6 @@
 using GenieFramework, Highlights, JuliaFormatter
 using DataFrames: DataFrame
+using Random, Base64
 include("Components.jl")
 include("utils.jl")
 using .Components: Component, variables, handlers, ui, get_code
@@ -11,13 +12,14 @@ using .Components: Component, variables, handlers, ui, get_code
     @in selected_component = "button"
 end
 
+disabled_handlers = ["upl_"] #the fileuploaded handler for the uplader component causes issues and needs to be disabled
 # load components
 for f in readdir("components")
     component = include("components/$f")
-    @show component(Main)
+    #= @show component(Main) =#
     M = @__MODULE__
     Base.eval(M, component.variables)
-    Base.eval(M, component.handlers)
+    (component.prefix ∉ disabled_handlers) && Base.eval(M, component.handlers)
     tabname = Symbol(string(component.prefix, "tab"))
     eval(:(@in $tabname = "julia"))
 end

@@ -12,12 +12,14 @@ StippleUI.layout(style="margin:auto;max-width:800px",
         ),
         drawer(bordered="", fieldname="left_drawer_open", side="left", var":mini"="ministate", var"@mouseover"="ministate = false", var"@mouseout"="ministate = true", var"mini-to-overlay"=true, width="170", breakpoint="200",
             list(bordered=true, separator=true, [
+                item(clickable="", vripple="", @click("selected_component = 'badge'"), [itemsection(avatar=true, icon("badge")), itemsection("Badge")]),
                 item(clickable="", vripple="", @click("selected_component = 'bignumber'"), [itemsection(avatar=true, icon("filter_7")), itemsection("Big number")]),
                 item(clickable="", vripple="", @click("selected_component = 'button'"), [itemsection(avatar=true, icon("smart_button")), itemsection("Button")]),
                 item(clickable="", vripple="", @click("selected_component = 'checkbox'"), [itemsection(avatar=true, icon("check_box")), itemsection("Checkbox")]),
                 item(clickable="", vripple="", @click("selected_component = 'chip'"), [itemsection(avatar=true, icon("crop_7_5")), itemsection("Chip")]),
                 item(clickable="", vripple="", @click("selected_component = 'column'"), [itemsection(avatar=true, icon("view_column")), itemsection("Column")]),
                 item(clickable="", vripple="", @click("selected_component = 'date'"), [itemsection(avatar=true, icon("date_range")), itemsection("Date")]),
+                #= item(clickable="", vripple="", @click("selected_component = 'drawer'"), [itemsection(avatar=true, icon("drawer")), itemsection("Drawer")]), =#
                 item(clickable="", vripple="", @click("selected_component = 'expansion'"), [itemsection(avatar=true, icon("expand_more")), itemsection("Expansion")]),
                 item(clickable="", vripple="", @click("selected_component = 'footer'"), [itemsection(avatar=true, icon("south")), itemsection("Footer")]),
                 item(clickable="", vripple="", @click("selected_component = 'heading'"), [itemsection(avatar=true, icon("title")), itemsection("Heading")]),
@@ -42,11 +44,16 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'toggles'", [itemsection(avatar=true, icon("toggle_on")), itemsection("Toggle")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'toolbar'", [itemsection(avatar=true, icon("view_week")), itemsection("Toolbar")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'tooltip'", [itemsection(avatar=true, icon("textsms")), itemsection("Tooltip")]),
+                item(clickable="", vripple="", @click("selected_component = 'uploader'"), [itemsection(avatar=true, icon("upload_file")), itemsection("Uploader")]),
                 item(clickable="", vripple="", @click("selected_component = 'video'"), [itemsection(avatar=true, icon("videocam")), itemsection("Video")]),
             ])
         ),
         page_container(
             [
+            Html.div(class="", @iif("selected_component == 'badge'"), [
+                form_card(BadgeC, "Badge"),
+                docs_card(@doc badge)
+            ]),
             Html.div(class="", @iif("selected_component == 'bignumber'"), [
                 form_card(BigNumber, "Big number"),
                 docs_card(@doc bignumber)
@@ -78,6 +85,10 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 form_card(DateRangeC, "Range date picker"),
                 docs_card(@doc datepicker)
             ]),
+            #= Html.div(class="", @iif("selected_component == 'drawer'"), [ =#
+            #=     form_card(Drawer, "Drawer"), =#
+            #=     docs_card(@doc drawer) =#
+            #= ]), =#
             Html.div(class="", @iif("selected_component == 'expansion'"), [
                 form_card(Expansion, "Expansion"),
                 docs_card(@doc expansionitem)
@@ -125,7 +136,7 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 docs_card(@doc range)
             ]),
             Html.div(class="", @iif("selected_component == 'rating'"), [
-                form_card(Spinner, "Rating"),
+                form_card(Rating, "Rating"),
                 docs_card(@doc rating)
             ]),
             Html.div(class="", @iif("selected_component == 'row'"), [
@@ -187,6 +198,10 @@ StippleUI.layout(style="margin:auto;max-width:800px",
             Html.div(class="", @iif("selected_component == 'tooltip'"), [
                 form_card(Tooltip, "Tooltip"),
                 docs_card(@doc tooltip)
+            ]),
+            Html.div(class="", @iif("selected_component == 'uploader'"), [
+                form_card(Uploader, "Uploader")
+                #= docs_card(@doc uploader) =#
             ]),
             Html.div(class="", @iif("selected_component == 'video'"), [
                 form_card(Video, "Video"),

@@ -8,6 +8,3 @@ PackageCompiler = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 Stipple = "4acbeb90-81a0-11ea-1966-bdaff8155998"
 StippleUI = "a3c5d34a-b254-4859-a8fa-b86abb7e84a3"
-
-[compat]
-GenieFramework = "1.22.0"
