@@ -20,7 +20,7 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 item(clickable="", vripple="", @click("selected_component = 'column'"), [itemsection(avatar=true, icon("view_column")), itemsection("Column")]),
                 item(clickable="", vripple="", @click("selected_component = 'datefield'"), [itemsection(avatar=true, icon("calendar_today")), itemsection("Date field")]),
                 item(clickable="", vripple="", @click("selected_component = 'date'"), [itemsection(avatar=true, icon("date_range")), itemsection("Date picker")]),
-                item(clickable="", vripple="", @click("selected_component = 'drawer'"), [itemsection(avatar=true, icon("drawer")), itemsection("Drawer")]),
+                #= item(clickable="", vripple="", @click("selected_component = 'drawer'"), [itemsection(avatar=true, icon("drawer")), itemsection("Drawer")]), =#
                 item(clickable="", vripple="", @click("selected_component = 'expansion'"), [itemsection(avatar=true, icon("expand_more")), itemsection("Expansion")]),
                 item(clickable="", vripple="", @click("selected_component = 'footer'"), [itemsection(avatar=true, icon("south")), itemsection("Footer")]),
                 item(clickable="", vripple="", @click("selected_component = 'heading'"), [itemsection(avatar=true, icon("title")), itemsection("Heading")]),
@@ -91,10 +91,10 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 form_card(DateRangeC, "Range date picker"),
                 docs_card(@doc datepicker)
             ]),
-            Html.div(class="", @iif("selected_component == 'drawer'"), [
-                form_card(Drawer, "Drawer"),
-                docs_card(@doc drawer)
-            ]),
+            #= Html.div(class="", @iif("selected_component == 'drawer'"), [ =#
+            #=     form_card(Drawer, "Drawer"), =#
+            #=     docs_card(@doc drawer) =#
+            #= ]), =#
             Html.div(class="", @iif("selected_component == 'expansion'"), [
                 form_card(Expansion, "Expansion"),
                 docs_card(@doc expansionitem)
