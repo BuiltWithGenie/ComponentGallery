@@ -18,7 +18,8 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 item(clickable="", vripple="", @click("selected_component = 'checkbox'"), [itemsection(avatar=true, icon("check_box")), itemsection("Checkbox")]),
                 item(clickable="", vripple="", @click("selected_component = 'chip'"), [itemsection(avatar=true, icon("crop_7_5")), itemsection("Chip")]),
                 item(clickable="", vripple="", @click("selected_component = 'column'"), [itemsection(avatar=true, icon("view_column")), itemsection("Column")]),
-                item(clickable="", vripple="", @click("selected_component = 'date'"), [itemsection(avatar=true, icon("date_range")), itemsection("Date")]),
+                item(clickable="", vripple="", @click("selected_component = 'datefield'"), [itemsection(avatar=true, icon("calendar_today")), itemsection("Date field")]),
+                item(clickable="", vripple="", @click("selected_component = 'date'"), [itemsection(avatar=true, icon("date_range")), itemsection("Date picker")]),
                 #= item(clickable="", vripple="", @click("selected_component = 'drawer'"), [itemsection(avatar=true, icon("drawer")), itemsection("Drawer")]), =#
                 item(clickable="", vripple="", @click("selected_component = 'expansion'"), [itemsection(avatar=true, icon("expand_more")), itemsection("Expansion")]),
                 item(clickable="", vripple="", @click("selected_component = 'footer'"), [itemsection(avatar=true, icon("south")), itemsection("Footer")]),
@@ -39,8 +40,9 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 item(clickable="", vripple="", @click("selected_component = 'spinner'"), [itemsection(avatar=true, icon("change_circle")), itemsection("Spinner")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'tab'", [itemsection(avatar=true, icon("tab")), itemsection("Tabs")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'table'", [itemsection(avatar=true, icon("table_view")), itemsection("Table")]),
+                item(clickable="", vripple="", var"v-on:click"="selected_component = 'timefield'", [itemsection(avatar=true, icon("timer_10_select")), itemsection("Time Field")]),
+                item(clickable="", vripple="", var"v-on:click"="selected_component = 'timepicker'", [itemsection(avatar=true, icon("schedule")), itemsection("Time Picker")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'timeline'", [itemsection(avatar=true, icon("timeline")), itemsection("Timeline")]),
-                item(clickable="", vripple="", var"v-on:click"="selected_component = 'timepicker'", [itemsection(avatar=true, icon("schedule")), itemsection("Time picker")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'toggles'", [itemsection(avatar=true, icon("toggle_on")), itemsection("Toggle")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'toolbar'", [itemsection(avatar=true, icon("view_week")), itemsection("Toolbar")]),
                 item(clickable="", vripple="", var"v-on:click"="selected_component = 'tooltip'", [itemsection(avatar=true, icon("textsms")), itemsection("Tooltip")]),
@@ -78,6 +80,10 @@ StippleUI.layout(style="margin:auto;max-width:800px",
             Html.div(class="", @iif("selected_component == 'column'"), [
                 form_card(ColumnC, "Column"),
                 #= docs_card(@doc checkbox) =#
+            ]),
+            Html.div(class="", @iif("selected_component == 'datefield'"), [
+                form_card(Datefield, "Date field"),
+                docs_card(@doc datefield)
             ]),
             Html.div(class="", @iif("selected_component == 'date'"), [
                 form_card(DatePickerC, "Date picker"),
@@ -177,13 +183,17 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 form_card(TableGrid, "Table grid layout"),
                 docs_card(@doc table)
             ]),
-            Html.div(class="", @iif("selected_component == 'timeline'"), [
-                form_card(Timeline, "Timeline"),
-                docs_card(@doc timeline)
+            Html.div(class="", @iif("selected_component == 'timefield'"), [
+                form_card(Timefield, "Time field"),
+                docs_card(@doc timefield)
             ]),
             Html.div(class="", @iif("selected_component == 'timepicker'"), [
                 form_card(Timepicker, "Time picker"),
                 docs_card(@doc timepicker)
+            ]),
+            Html.div(class="", @iif("selected_component == 'timeline'"), [
+                form_card(Timeline, "Timeline"),
+                docs_card(@doc timeline)
             ]),
             Html.div(class="", @iif("selected_component == 'toggles'"), [
                 form_card(Toggle, "Toggle"),
