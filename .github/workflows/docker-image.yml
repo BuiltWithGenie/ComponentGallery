@@ -2,22 +2,37 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag pjgim/gallery
+      # Extract version from project.toml
+      - name: Extract version from project.toml
+        id: project_version
+        run: echo "::set-output name=VERSION::$(sed -n 's/^version = \"\([^\"]*\)\"/\1/p' project.toml)"
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+      # Increment version
+      - name: Increment version
+        run: |
+          current_version=$(sed -n 's/^version = \"\([^\"]*\)\"/\1/p' project.toml)
+          new_version=$(($current_version + 1))
+          sed -i "s/version = \"$current_version\"/version = \"$new_version\"/" project.toml
+          git config --global user.name 'PGimenez'
+          git commit -am "Increment version to $new_version"
+          git push
 
-    - name: Push Docker image
-      run: docker push pjgim/gallery
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag pjgim/gallery:${{ steps.project_version.outputs.VERSION }}
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+      - name: Push Docker image
+        run: docker push pjgim/gallery:${{ steps.project_version.outputs.VERSION }}
