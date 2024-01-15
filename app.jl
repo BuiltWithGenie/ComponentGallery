@@ -1,4 +1,4 @@
-using GenieFramework, Highlights, JuliaFormatter
+using GenieFramework, Highlights, JuliaFormatter, Dates
 using DataFrames: DataFrame
 using Random, Base64
 include("Components.jl")

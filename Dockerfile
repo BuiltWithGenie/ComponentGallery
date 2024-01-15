@@ -1,4 +1,5 @@
 FROM julia:latest
+RUN apt-get update && apt-get install -y vim
 RUN useradd --create-home --shell /bin/bash genie
 RUN mkdir /home/genie/app
 COPY . /home/genie/app
