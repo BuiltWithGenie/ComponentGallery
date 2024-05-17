@@ -183,10 +183,10 @@ StippleUI.layout(style="margin:auto;max-width:800px",
                 form_card(TableGrid, "Table grid layout"),
                 docs_card(@doc table)
             ]),
-            #= Html.div(class="", @iif("selected_component == 'timefield'"), [ =#
-            #=     form_card(Timefield, "Time field"), =#
-            #=     docs_card(@doc timefield) =#
-            #= ]), =#
+            Html.div(class="", @iif("selected_component == 'timefield'"), [
+                form_card(Timefield, "Time field"),
+                docs_card(@doc timefield)
+            ]),
             Html.div(class="", @iif("selected_component == 'timepicker'"), [
                 form_card(Timepicker, "Time picker"),
                 docs_card(@doc timepicker)
