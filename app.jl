@@ -6,6 +6,7 @@ include("utils.jl")
 using .Components: Component, variables, handlers, ui, get_code
 @genietools
 
+
 @app begin
     @in left_drawer_open = true
     @in ministate = true
@@ -27,13 +28,15 @@ end
 # it'd be easier to pass the function to the docs_card function as a parameter `f`, but calling @doc f from insinde `docs_card` yields "no documentation found"
 function docs_card(docs)
     docs = string(docs.content[1])
+    docs = replace(docs, r"# " => "### ")
+    @show docs
     docs = highlight_markdown_code_blocks(docs)
     # setting a key is necessary to force the page to re-render the md-block component when the tab changes. otherwise a page reload is needed
-    card(class="q-pa-md q-mt-md p-5 mt-5", [h1("Docstring"), "<md-block :key='$(string(randn(10)))'>  $docs </md-block>"])
+    card(class="q-pa-md q-mt-md p-5 mt-5", [h3("Docstring"), "<md-block :key='$(string(randn(10)))'>  $docs </md-block>"])
 end
 
 function form_card(code, title="")
-    card(style="margin-top:10px;padding:15px", [h4(title), code])
+  card(style="margin-top:10px;padding:15px", [h4(title),br(), code])
 end
 
 
@@ -45,7 +48,7 @@ function form_card(c::Component, title="", M=@__MODULE__)
 
     tabname = Symbol(string(c.prefix, "tab"))
     Html.div(class="flex", [
-        card(style="margin-top:10px;padding:15px;width:100%", [h4(title), Html.div(class="q-pl-sm q-pr-sm", ui(c)),
+                            card(style="margin-top:10px;padding:15px;width:100%", [h4(title),br(), Html.div(class="q-pl-sm q-pr-sm", ui(c)),
             expansionitem(class="q-mt-lg", label="Show code", dense=true, var"dense-toggle"=true, var"expand-separator"=true, var"header-class"="bg-blue-grey-1",
                 [
                     quasar(:tabs, fieldname=Symbol(tabname), dense=true, align="left", style="background:white", class="text-black", [

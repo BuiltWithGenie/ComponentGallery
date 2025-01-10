@@ -3,7 +3,7 @@
 #= script(src="/highlight.min.js") =#
 StippleUI.layout(style="margin:auto;max-width:800px",
     [
-        quasar(:header, style="background:darkblue", toolbar(
+        quasar(:header, style="background:steelblue", toolbar(
             [
             btn(; dense=true, flat=true, round=true, icon="menu", @click("left_drawer_open = !left_drawer_open")),
             toolbartitle("Genie Component Gallery")
